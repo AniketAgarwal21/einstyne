@@ -11,8 +11,9 @@ if (process.env.NODE_ENV === 'production') {
     })
 }
 
+app.use(express.json())
 app.use('/', router)
-    
+
 
 const PORT = process.env.PORT || 8000
 http.listen(PORT, () => {
