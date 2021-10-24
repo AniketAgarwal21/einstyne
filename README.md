@@ -28,3 +28,22 @@ To run this project on your local machine, follow the steps:
   npm install
   npm start
 ```
+
+## Project Structure
+
+| Parameter | Information    
+| :-------- | :------- 
+| Backend Main | `/server.js`   
+| React Frontend | `/client`
+| Frontend Styling | `tailwind.css`
+| Database | `/db && /models`
+| API Controllers | `/controllers`
+| Express Middlewares | `/middlewares`
+
+
+## Reference Links
+
+| Name
+| :--------  
+| [Tailwind CSS](https://tailwindcss.com/)
+| [Tailblocks Components](https://tailblocks.cc/)
