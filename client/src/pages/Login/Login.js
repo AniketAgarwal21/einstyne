@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import ToastRender from './../../utilities/ToastRender';
 import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 function Login() {
 
@@ -10,8 +11,10 @@ function Login() {
     const [password, setPassword] = useState("")
 
     const submitLogin = (email, password) => {
+
         if (email === "" || password === "") {
             ToastRender({ message: "Please fill all the fields!", type: "error" })
+            return
         }
 
         if (password.length < 8) {
@@ -20,13 +23,14 @@ function Login() {
         }
 
         const body = { email, password }
-        
-        ToastRender({message:"Registered Successfully!", type:"success"})
+
+        ToastRender({ message: "Registered Successfully!", type: "success" })
 
     }
 
     return (
         <section className="text-gray-400 bg-gray-900 body-font">
+            <ToastContainer />
             <div className="container px-5 py-24 mx-auto flex flex-wrap items-center">
                 <div className="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0 lg:ml-6">
                     <h1 className="title-font font-medium text-3xl text-white">Slow-carb next level shoindxgoitch ethical authentic, poko scenester</h1>
