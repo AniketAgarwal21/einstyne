@@ -2,8 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.min.css';
 import ToastRender from '../../utilities/ToastRender';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Register() {
 
@@ -11,11 +11,22 @@ function Register() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
-    const submitRegister = (email, password) => {
-        const body = { email, password }
+    const submitRegister = (name, email, password) => {
+        
+        if (email === "" || password === "" || name === "") {
+            ToastRender({ message: "Please fill all the fields!", type: "error" })
+            return
+        }
 
-        // ToastRender({message:"this is a success message", type:"success"})
-        // ToastRender({message:"this is an error message", type:"error"})
+        // password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}/) // for min 8 chars - lowercase uppercase number
+        if (password.length < 8) {
+            ToastRender({ message: "Password too short!", type: "error" })
+            return
+        }
+
+        const body = { name, email, password }
+
+        ToastRender({message:"Registered Successfully!", type:"success"})
 
     }
 
@@ -41,7 +52,7 @@ function Register() {
                         <label for="password" className="leading-7 text-sm text-gray-400">Password</label>
                         <input type="password" value={password} onChange={(e) => { setPassword(e.target.value) }} id="password" name="password" className="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-red-900 rounded border border-gray-600 focus:border-red-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                     </div>
-                    <button onClick={() => { submitRegister(email, password) }} className="text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg">Register</button>
+                    <button onClick={() => { submitRegister(name, email, password) }} className="text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg">Register</button>
                     <p className="text-xs mt-3">Already have an account? <Link to="/login">Login</Link></p>
                 </div>
             </div>

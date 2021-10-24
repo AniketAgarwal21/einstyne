@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import ToastRender from './../../utilities/ToastRender';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
 
@@ -9,10 +10,18 @@ function Login() {
     const [password, setPassword] = useState("")
 
     const submitLogin = (email, password) => {
-        const body = { email, password }
+        if (email === "" || password === "") {
+            ToastRender({ message: "Please fill all the fields!", type: "error" })
+        }
 
-        // ToastRender({message:"this is a success message", type:"success"})
-        // ToastRender({message:"this is an error message", type:"error"})
+        if (password.length < 8) {
+            ToastRender({ message: "Password too short!", type: "error" })
+            return
+        }
+
+        const body = { email, password }
+        
+        ToastRender({message:"Registered Successfully!", type:"success"})
 
     }
 
