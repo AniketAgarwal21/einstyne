@@ -29,16 +29,19 @@ To run this project on your local machine, follow the steps:
   npm start
 ```
 
-## Project Structure
+## Directory Structure
 
 | Parameter | Information    
 | :-------- | :------- 
 | Backend Main | `/server.js`   
-| React Frontend | `/client`
-| Frontend Styling | `tailwind.css`
-| Database | `/db && /models`
 | API Controllers | `/controllers`
 | Express Middlewares | `/middlewares`
+| Database Config | `/db.js`
+| Database Schemas | `/models`
+| Database Requests | `/services`
+| React Frontend | `/client`
+| Client-Side Validations | `/client/validations`
+| Frontend API Requests | `/client/services`
 
 
 ## Reference Links
@@ -47,3 +50,12 @@ To run this project on your local machine, follow the steps:
 | :--------  
 | [Tailwind CSS](https://tailwindcss.com/)
 | [Tailblocks Components](https://tailblocks.cc/)
+| [React Router DOM](https://reactrouter.com/web/guides/quick-start)
+
+
+## Demo
+The link to the [demo](https://einstyne.herokuapp.co)
+
+## Authors
+
+- [@Aniket Agarwal](https://www.github.com/AniketAgarwal21)

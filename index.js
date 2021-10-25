@@ -1,8 +1,9 @@
-const express = require("express")
-const router = require("./routes")
-const path = require("path")
+const express = require('express')
+const dbConnect = require('./db')
+const router = require('./routes')
+const path = require('path')
 const app = express()
-const http = require("http").Server(app)
+const http = require('http').Server(app)
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, "client", "build")))
@@ -10,6 +11,8 @@ if (process.env.NODE_ENV === 'production') {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
     })
 }
+
+dbConnect()
 
 app.use(express.json())
 app.use('/', router)

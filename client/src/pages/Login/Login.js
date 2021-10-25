@@ -4,6 +4,8 @@ import { useState } from 'react';
 import ToastRender from './../../utilities/ToastRender';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import { postLogin } from '../../services/AuthRequests';
+import authValidator from '../../validations/authValidator';
 
 function Login() {
 
@@ -12,20 +14,28 @@ function Login() {
 
     const submitLogin = (email, password) => {
 
-        if (email === "" || password === "") {
-            ToastRender({ message: "Please fill all the fields!", type: "error" })
-            return
-        }
-
-        if (password.length < 8) {
-            ToastRender({ message: "Password too short!", type: "error" })
-            return
-        }
+        const { message, type } = authValidator.loginValidator(email, password)
+        if(type === "error") return ToastRender({ message, type })
 
         const body = { email, password }
 
-        ToastRender({ message: "Registered Successfully!", type: "success" })
-
+        // postLogin(body)
+        // .then(({data}) => {
+        //     console.log(data)
+        //     if(data.success){
+        //         ToastRender({ message: data.success, type: "success" })
+        //     } else if(data.error){
+        //         ToastRender({ message: data.error, type: "error" })
+        //     }
+        //     setEmail("")
+        //     setPassword("")
+        // })
+        // .catch(err => {
+        //     ToastRender({ message: "Some Error Occurred", type: "error" })
+        //     console.log(err)
+        // })
+        
+        ToastRender({ message: "Logged In Successfully", type: "success" })
     }
 
     return (
@@ -39,11 +49,11 @@ function Login() {
                 <div className="lg:w-2/6 md:w-1/2 bg-gray-800 bg-opacity-50 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
                     <h2 className="text-white text-lg font-medium title-font mb-5 text-center">Login</h2>
                     <div className="relative mb-4">
-                        <label for="email" className="leading-7 text-sm text-gray-400">Email</label>
+                        <label htmlFor="email" className="leading-7 text-sm text-gray-400">Email</label>
                         <input type="email" value={email} onChange={(e) => { setEmail(e.target.value) }} id="email" name="email" className="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-red-900 rounded border border-gray-600 focus:border-red-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                     </div>
                     <div className="relative mb-4">
-                        <label for="password" className="leading-7 text-sm text-gray-400">Password</label>
+                        <label htmlFor="password" className="leading-7 text-sm text-gray-400">Password</label>
                         <input type="password" value={password} onChange={(e) => { setPassword(e.target.value) }} id="password" name="password" className="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-red-900 rounded border border-gray-600 focus:border-red-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                     </div>
                     <button onClick={() => { submitLogin(email, password) }} className="text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg">Login</button>
